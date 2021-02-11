@@ -1,4 +1,4 @@
-package com.example.sewater;
+package com.example.sewater.controller;
 
 import com.example.sewater.domain.Message;
 import com.example.sewater.repo.MessageRepository;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class GreetingController {
+public class MainController {
 
     @Autowired
     private MessageRepository messageRepository;
@@ -44,11 +44,13 @@ public class GreetingController {
     @PostMapping("filter")
     public String filter(@RequestParam String filter, Map<String, Object> model) {
         Iterable<Message> messages;
+
         if(filter != null && filter.isEmpty()){
             messages = messageRepository.findByTag(filter);
         } else {
             messages = messageRepository.findAll();
         }
+
         return "main";
     }
 
